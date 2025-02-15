@@ -1,3 +1,5 @@
 .env
 files
 .cache
+.streamlit
+.DS_Store
