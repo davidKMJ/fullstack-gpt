@@ -12,7 +12,7 @@ from langchain.callbacks.base import BaseCallbackHandler
 
 st.set_page_config(
     page_title="Private GPT",
-    page_icon="🤖",
+    page_icon="🔒",
 )
 
 model_name = "mistral:latest"

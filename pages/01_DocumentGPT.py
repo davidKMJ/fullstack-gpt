@@ -11,7 +11,7 @@ from langchain.callbacks.base import BaseCallbackHandler
 
 st.set_page_config(
     page_title="Document GPT",
-    page_icon="🤖",
+    page_icon="📄",
 )
 
 if "messages" not in st.session_state:

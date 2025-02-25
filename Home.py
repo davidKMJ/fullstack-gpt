@@ -13,7 +13,8 @@ st.markdown(
 Here are the apps:
 
 - [x] [Document GPT](/DocumentGPT)
-- [ ] [Private GPT](/PrivateGPT)
+- [x] [Private GPT](/PrivateGPT)
+- [ ] [Quiz GPT](/QuizGPT)
 
 """
 )
