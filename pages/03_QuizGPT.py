@@ -209,6 +209,16 @@ def split_file(file):
     docs = loader.load_and_split(text_splitter=splitter)
     return docs
 
+@st.cache_data(show_spinner="Making quiz...")
+def run_quiz_chain(_docs, topic):
+    chain = {"context": questions_chain} | formatting_chain | output_parser
+    return chain.invoke(_docs)
+
+@st.cache_data(show_spinner="Searching Wikipedia...")
+def wiki_search(term):
+    retriever = WikipediaRetriever(top_k_results=1)
+    return retriever.get_relevant_documents(term)
+
 with st.sidebar:
     docs = None
     choice = st.selectbox(
@@ -228,9 +238,8 @@ with st.sidebar:
     else:
         topic = st.text_input("Name of an article")
         if topic:
-            retriever = WikipediaRetriever(top_k_results=1)
             with st.status("Searching Wikipedia..."):
-                docs = retriever.get_relevant_documents(topic)
+                docs = wiki_search(topic)
 
 if not docs:
     st.markdown("""
@@ -241,9 +250,15 @@ I will make a quiz from Wikipedia articles or files you upload to test your know
 Get started by uploading a file or searching for a Wikipedia article.
 """)
 else:
-    start = st.button("Generate Quiz")
+    response = run_quiz_chain(docs, topic if topic else file.name)
 
-    if start:
-        chain = {"context": questions_chain} | formatting_chain | output_parser
-        response = chain.invoke(docs)
-        st.write(response)
+    with st.form(key="questions_form"):
+        for question in response["questions"]:
+            st.write(question["question"])
+            value = st.radio("Select an option.", [answer["answer"] for answer in question["answers"]], index=None)
+            if {"answer": value, "correct": True} in question["answers"]:
+                st.success("Correct!")
+            elif value is not None:
+                st.error("Incorrect!")
+            st.write(value)
+        button = st.form_submit_button(on_click=None)

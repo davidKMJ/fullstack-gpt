@@ -14,7 +14,8 @@ Here are the apps:
 
 - [x] [Document GPT](/DocumentGPT)
 - [x] [Private GPT](/PrivateGPT)
-- [ ] [Quiz GPT](/QuizGPT)
+- [x] [Quiz GPT](/QuizGPT)
+- [ ] [Site GPT](/SiteGPT)
 
 """
 )
