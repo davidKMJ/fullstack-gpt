@@ -1,5 +1,10 @@
-.env
+# Editor directories and files
 files
 .cache
 .streamlit
+
+# Environment variables
+.env
+
+# macOS
 .DS_Store
