@@ -16,7 +16,7 @@ A portfolio of GPT-powered applications demonstrating various use cases of LLM i
 
 ```bash
 # Clone the repository
-git clone <repo-url>
+git clone https://github.com/davidKMJ/fullstack-gpt.git
 cd fullstack-gpt
 
 # Install dependencies
